@@ -1,0 +1,240 @@
+/* --- RESET E CONFIGURAÇÕES GLOBAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #050a14; /* Azul noturno profundo estilo DC / Gotham */
+    color: #f0f4f8;            /* Texto branco gelo */
+    padding: 20px;
+}
+
+/* --- GRID PRINCIPAL (EXATAMENTE COMO O ESQUEMA) --- */
+.page-container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sub-navi content"
+        "facets context"
+        "footer footer";
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 15px;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 95vh;
+}
+
+/* --- HEADER --- */
+.header {
+    grid-area: header;
+    background-color: #0b162c;
+    border: 1px solid #162b4d;
+    border-top: 4px solid #0476F2; /* Azul icônico da DC Comics */
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .titulo {
+    font-size: 1.8rem;
+    color: #f0f4f8;
+    text-transform: uppercase;
+    font-weight: 800;
+    border-left: 5px solid #0476F2;
+    padding-left: 10px;
+}
+
+.btn-voltar {
+    background-color: #0476F2;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: background-color 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #1e8fff; /* Azul mais vibrante ao passar o mouse */
+}
+
+/* --- SUB NAVI (BANNER LATERAL) --- */
+.sub-navi {
+    grid-area: sub-navi;
+    background-color: #050a14;
+    border: 1px solid #162b4d;
+    border-radius: 6px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-carousel, .banner-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.banner-slides img.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.banner-slides img.slide.active {
+    opacity: 1;
+}
+
+.banner-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.banner-indicators .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(240, 244, 248, 0.3);
+    cursor: pointer;
+}
+
+.banner-indicators .indicator.active {
+    background-color: #0476F2;
+}
+
+/* --- CONTENT (CATÁLOGO) --- */
+.content {
+    grid-area: content;
+    background-color: #0b162c;
+    border: 1px solid #162b4d;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+#colecao {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+/* Estilo dos cards gerados pelo JS */
+.card-produto {
+    background: #050a14;
+    border: 1px solid #162b4d;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card-produto:hover {
+    transform: translateY(-3px);
+    border-color: #0476F2;
+}
+
+.card-produto img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-produto .card-body {
+    padding: 12px;
+}
+
+.card-produto h3 {
+    font-size: 1.1rem;
+    color: #f0f4f8;
+    margin-bottom: 6px;
+}
+
+.card-produto p {
+    color: #9bb0cc;
+    font-size: 0.9rem;
+}
+
+/* --- CONTEXT --- */
+.context {
+    grid-area: context;
+    background-color: #0b162c;
+    border: 1px solid #162b4d;
+    border-radius: 6px;
+    padding: 15px;
+    color: #9bb0cc;
+    font-size: 0.9rem;
+}
+
+/* --- FOOTER --- */
+.footer {
+    grid-area: footer;
+    background-color: #0b162c;
+    border: 1px solid #162b4d;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    color: #9bb0cc;
+    font-size: 0.85rem;
+}
+
+/* --- RESPONSIVIDADE PARA MOBILE --- */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-areas:
+            "header"
+            "sub-navi"
+            "facets"
+            "content"
+            "context"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna: texto em cima, imagem embaixo */
+    align-items: center;    /* Centraliza os elementos no card */
+    background-color: #0f1e3a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: #fff;
+    width: 280px;           /* Opcional: define uma largura fixa ou máxima para o card */
+}
+
+/* Área do texto ocupando toda a largura superior */
+.card .texto {
+    width: 100%;
+    margin-bottom: 15px;    /* Cria um espaço entre o texto e a imagem */
+    text-align: left;       /* Alinha o texto à esquerda (ou 'center' se preferir) */
+}
+
+/* Área da imagem embaixo */
+.card .img {
+    width: 100%;
+    height: 200px;          /* Ajuste a altura que preferir para a imagem */
+}
+
+.card .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Faz a imagem preencher o espaço sem distorcer */
+    border-radius: 6px;
+}
